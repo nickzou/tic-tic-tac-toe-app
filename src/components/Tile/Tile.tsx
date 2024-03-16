@@ -14,7 +14,7 @@ const Tile: FC<Props> = ({ active, player }) => {
       className={cx(
         "tile h-full w-full rounded-none [&_svg_*]:h-full [&_svg_*]:w-full [&_svg]:w-full [&_svg]:h-full aspect-square p-6",
         { "bg-white": active },
-        { "bg-slate-300": !active }
+        { "bg-slate-300 [&_svg_*]:stroke-black/50": !active }
       )}
     >
       {player === "X" && <X />}
