@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import LargeTile from "../LargeTile/LargeTile";
 import { useGameContext } from "@/contexts/GameContext/GameContext";
 import cx from "classnames";
@@ -9,8 +9,8 @@ const Board: FC = () => {
   return (
     <div
       className={cx(
-        "board h-full aspect-square grid grid-cols-3 grid-rows-3 gap-2 bg-black",
-        { "pointer-events-none": currentBoard !== currentMove }
+        "board grid aspect-square h-full grid-cols-3 grid-rows-3 gap-2 bg-black",
+        { "pointer-events-none": currentBoard !== currentMove },
       )}
     >
       {mainBoard.map((t, i) => (
