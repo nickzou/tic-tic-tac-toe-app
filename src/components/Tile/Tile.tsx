@@ -3,6 +3,7 @@ import X from "@/icons/X/X";
 import { FC } from "react";
 import cx from "classnames";
 import { motion } from "framer-motion";
+import fadeIn from "@/variables/fadeIn";
 
 type Props = {
   active: boolean;
@@ -10,11 +11,6 @@ type Props = {
 };
 
 const Tile: FC<Props> = ({ active, player }) => {
-  const svgVariants = {
-    hidden: { opacity: 0, scale: 0.5 }, // Start with the SVGs being transparent and scaled down
-    visible: { opacity: 1, scale: 1 }, // Animate to fully visible and scaled normally
-  };
-
   return (
     <div
       className={cx(
@@ -33,7 +29,7 @@ const Tile: FC<Props> = ({ active, player }) => {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          variants={svgVariants}
+          variants={fadeIn}
           transition={{ duration: 0.2 }}
         >
           <X />
@@ -44,7 +40,7 @@ const Tile: FC<Props> = ({ active, player }) => {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          variants={svgVariants}
+          variants={fadeIn}
           transition={{ duration: 0.2 }}
         >
           <O />

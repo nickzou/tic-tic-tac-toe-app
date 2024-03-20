@@ -11,7 +11,8 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
       '@functions' : path.resolve(__dirname, './src/functions'),
       '@contexts': path.resolve(__dirname, './src/contexts'),
-      '@types': path.resolve(__dirname, './src/types')
+      '@types': path.resolve(__dirname, './src/types'),
+      '@variables': path.resolve(__dirname, './src/variables')
       // Add more aliases here
     },
   },
