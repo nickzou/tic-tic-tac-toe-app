@@ -12,7 +12,8 @@
       "@components": ["./src/components/*"],
       "@functions": ["./src/functions/*"],
       "@contexts": ["./src/contexts/*"],
-      "@types": ["./src/types/*"]
+      "@types": ["./src/types/*"],
+      "@variables": ["./src/variables/*"]
       // Match your Vite aliases here
     },
 
