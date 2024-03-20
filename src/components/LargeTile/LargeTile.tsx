@@ -4,6 +4,7 @@ import checkVictoryConditions from "@/functions/checkVictoryConditions/checkVict
 import { useGameContext } from "@/contexts/GameContext/GameContext";
 import { board, currentBoard } from "@/types/currentBoard";
 import cx from "classnames";
+import WinTile from "../WinTile/WinTile";
 
 type LargeTile = {
   selfIndex: board;
@@ -64,9 +65,9 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
             (currentMove === selfIndex && currentBoard !== null),
         },
         {
-          "bg-slate-300 pointer-events-none":
+          "pointer-events-none bg-slate-300":
             currentBoard !== selfIndex && currentBoard !== null,
-        }
+        },
       )}
     >
       <div
@@ -77,17 +78,23 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
           },
           {
             "bg-black/50": currentBoard !== selfIndex && currentBoard !== null,
-          }
+          },
         )}
       >
-        {board.map((t, i) => (
-          <button key={i} onClick={() => handleClick(i)}>
-            <Tile
-              active={currentBoard === null || currentBoard === selfIndex}
-              player={playerSymbol(t)}
-            />
-          </button>
-        ))}
+        {mainBoard[selfIndex] === 0 &&
+          board.map((t, i) => (
+            <button key={i} onClick={() => handleClick(i)}>
+              <Tile
+                active={currentBoard === null || currentBoard === selfIndex}
+                player={playerSymbol(t)}
+              />
+            </button>
+          ))}
+        {(mainBoard[selfIndex] === 1 || mainBoard[selfIndex] === 2) && (
+          <WinTile
+            winner={playerSymbol(mainBoard[selfIndex] as 1 | 2) as "X" | "O"}
+          />
+        )}
       </div>
     </div>
   );

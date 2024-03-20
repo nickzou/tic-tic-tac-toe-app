@@ -20,8 +20,7 @@ const Tile: FC<Props> = ({ active, player }) => {
       className={cx(
         "tile aspect-square h-full w-full rounded-none p-6   [&_svg]:h-full [&_svg]:w-full [&_svg_*]:h-full [&_svg_*]:w-full",
         {
-          "bg-white transition-[background] duration-200 [&_svg_*]:stroke-black/50":
-            active,
+          "bg-white transition-[background] duration-200": active,
         },
         {
           "bg-slate-300 transition-[background] duration-200 [&_svg_*]:stroke-black/50":
