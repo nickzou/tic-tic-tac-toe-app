@@ -10,7 +10,10 @@ const Board: FC = () => {
     <div
       className={cx(
         "board grid aspect-square h-full grid-cols-3 grid-rows-3 gap-2 bg-black",
-        { "pointer-events-none": currentBoard !== currentMove },
+        {
+          "pointer-events-none":
+            currentBoard !== currentMove && currentBoard !== null,
+        },
       )}
     >
       {mainBoard.map((t, i) => (

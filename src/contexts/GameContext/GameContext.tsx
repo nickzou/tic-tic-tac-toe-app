@@ -25,12 +25,10 @@ const GameContext = createContext<GameContextType | undefined>(undefined);
 export const GameContextProvider = ({ children }: { children: ReactNode }) => {
   const [activePlayer, setActivePlayer] = useState<1 | 2>(1);
   const [mainBoard, setMainBoard] = useState<(0 | 1 | 2)[]>(
-    new Array(9).fill(0)
+    new Array(9).fill(0),
   );
   const [currentBoard, setCurrentBoard] = useState<currentBoard>(null);
   const [currentMove, setCurrentMove] = useState<currentBoard>(null);
-
-  useEffect(() => {}, [currentMove]);
 
   const value = {
     activePlayer,

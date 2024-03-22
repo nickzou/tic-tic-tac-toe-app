@@ -31,6 +31,7 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
   };
 
   const handleClick = (current: number) => {
+    if (currentBoard === null) setCurrentBoard(selfIndex as currentBoard);
     setBoard(() => {
       const newBoard = [...board];
       newBoard[current] = activePlayer;
@@ -41,18 +42,25 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
 
   useEffect(() => {
     if (checkVictoryConditions(board)) {
-      if (currentBoard !== null) {
-        setMainBoard(() => {
-          const newBoard = [...mainBoard];
-          newBoard[currentBoard] = activePlayer;
-          return newBoard;
-        });
-      }
+      setMainBoard(() => {
+        const newBoard = [...mainBoard];
+        newBoard[currentBoard as number] = activePlayer;
+        return newBoard;
+      });
+      setCurrentBoard(null);
     } else {
-      setActivePlayer((currentPlayer) => (currentPlayer === 1 ? 2 : 1));
       setCurrentMove(currentTile as currentBoard);
-      setCurrentBoard(currentTile as currentBoard);
+      if (mainBoard[currentTile as 1 | 2] !== 0) {
+        setCurrentBoard(null);
+      } else {
+        setCurrentBoard(currentTile as currentBoard);
+      }
     }
+    setActivePlayer((currentPlayer) => (currentPlayer === 1 ? 2 : 1));
+    console.log(`activePlayer: ${activePlayer}`);
+    console.log(`mainBoard: ${mainBoard}`);
+    console.log(`currentBoard: ${currentBoard}`);
+    console.log(`currentMove: ${currentMove}`);
   }, [board, currentTile]);
 
   return (
@@ -62,11 +70,13 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
         {
           "bg-white":
             currentBoard === null ||
-            (currentMove === selfIndex && currentBoard !== null),
+            (currentMove === selfIndex && currentBoard !== null) ||
+            mainBoard[selfIndex] !== 0,
         },
         {
           "pointer-events-none bg-slate-300":
-            currentBoard !== selfIndex && currentBoard !== null,
+            (currentBoard !== selfIndex && currentBoard !== null) ||
+            mainBoard[selfIndex] !== 0,
         },
       )}
     >
@@ -77,7 +87,9 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
             "bg-black": currentBoard === null || currentBoard === selfIndex,
           },
           {
-            "bg-black/50": currentBoard !== selfIndex && currentBoard !== null,
+            "bg-black/50":
+              (currentBoard !== selfIndex && currentBoard !== null) ||
+              mainBoard[selfIndex] !== 0,
           },
         )}
       >
