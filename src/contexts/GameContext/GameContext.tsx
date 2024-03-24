@@ -1,3 +1,4 @@
+import checkVictoryConditions from "@/functions/checkVictoryConditions/checkVictoryConditions";
 import { currentBoard } from "@/types/currentBoard";
 import {
   Dispatch,
@@ -8,6 +9,7 @@ import {
   useContext,
   useEffect,
 } from "react";
+import playerSymbol from "@/functions/playerSymbol/playerSymbol";
 
 type GameContextType = {
   activePlayer: 1 | 2;
@@ -29,6 +31,14 @@ export const GameContextProvider = ({ children }: { children: ReactNode }) => {
   );
   const [currentBoard, setCurrentBoard] = useState<currentBoard>(null);
   const [currentMove, setCurrentMove] = useState<currentBoard>(null);
+  const [winner, setWinner] = useState<1 | 2 | null>(null);
+
+  useEffect(() => {
+    if (checkVictoryConditions(mainBoard)) {
+      setWinner(activePlayer);
+      console.log(`${playerSymbol(activePlayer)} wins!`);
+    }
+  }, [mainBoard]);
 
   const value = {
     activePlayer,
@@ -39,6 +49,8 @@ export const GameContextProvider = ({ children }: { children: ReactNode }) => {
     setCurrentBoard,
     currentMove,
     setCurrentMove,
+    winner,
+    setWinner,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
