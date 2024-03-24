@@ -5,6 +5,7 @@ import { useGameContext } from "@/contexts/GameContext/GameContext";
 import { board, currentBoard } from "@/types/currentBoard";
 import cx from "classnames";
 import WinTile from "../WinTile/WinTile";
+import playerSymbol from "@/functions/playerSymbol/playerSymbol";
 
 type LargeTile = {
   selfIndex: board;
@@ -23,12 +24,6 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
   } = useGameContext();
   const [board, setBoard] = useState(new Array(9).fill(0));
   const [currentTile, setCurrentTile] = useState<currentBoard>(null);
-
-  const playerSymbol = (player: 1 | 2) => {
-    if (player === 1) return "X";
-    if (player === 2) return "O";
-    return null;
-  };
 
   const handleClick = (current: number) => {
     if (currentBoard === null) setCurrentBoard(selfIndex as currentBoard);
@@ -57,10 +52,6 @@ const LargeTile: FC<LargeTile> = ({ selfIndex }) => {
       }
     }
     setActivePlayer((currentPlayer) => (currentPlayer === 1 ? 2 : 1));
-    console.log(`activePlayer: ${activePlayer}`);
-    console.log(`mainBoard: ${mainBoard}`);
-    console.log(`currentBoard: ${currentBoard}`);
-    console.log(`currentMove: ${currentMove}`);
   }, [board, currentTile]);
 
   return (
